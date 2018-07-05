@@ -541,7 +541,7 @@ private:
 
   @param forward - true for forward, false for backward
   */
-  void switch_focus(bool forward = true);
+  bool switch_focus(bool forward = true);
 
   /// Calls an attached function specified by the number.
   /**
@@ -725,7 +725,7 @@ public:
 
   @param forward - true for forward, false for backward
   */
-  void switch_focus(bool forward = true);
+  bool switch_focus(bool forward = true);
 
   /// Sets the focus position for the whole menu at once.
   /**

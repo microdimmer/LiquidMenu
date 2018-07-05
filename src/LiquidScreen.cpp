@@ -100,13 +100,16 @@ void LiquidScreen::print(DisplayClass *p_liquidCrystal) const {
 	}
 }
 
-void LiquidScreen::switch_focus(bool forward) {
+bool LiquidScreen::switch_focus(bool forward) {
+	bool has_next_line;
 	print_me(reinterpret_cast<uintptr_t>(this));
 	do {
 		if (forward) {
 			if (_focus < _lineCount) {
 				_focus++;
+				has_next_line = true;
 				if (_focus == _lineCount) {
+					has_next_line = false;
 					break;
 				}
 			} else {
@@ -115,13 +118,16 @@ void LiquidScreen::switch_focus(bool forward) {
 		} else { //else (forward)
 			if (_focus == 0) {
 				_focus = _lineCount;
+				has_next_line = false;
 				break;
 			} else {
 				_focus--;
+				has_next_line = true;
 			}
 		} //else (forward)
 	} while (_p_liquidLine[_focus]->_focusable == false);
 	DEBUG(F("Focus switched to ")); DEBUGLN(_focus);
+	return has_next_line;
 }
 
 bool LiquidScreen::call_function(uint8_t number) const {

@@ -164,10 +164,12 @@ bool LiquidMenu::operator=(LiquidScreen &p_liquidScreen) {
   return change_screen(p_liquidScreen);
 }
 
-void LiquidMenu::switch_focus(bool forward) {
+bool LiquidMenu::switch_focus(bool forward) {
+  bool has_next_line;
   _p_liquidCrystal->clear();
-  _p_liquidScreen[_currentScreen]->switch_focus(forward);
+  has_next_line = _p_liquidScreen[_currentScreen]->switch_focus(forward);
   update();
+  return has_next_line;
 }
 
 bool LiquidMenu::set_focusPosition(Position position) {
