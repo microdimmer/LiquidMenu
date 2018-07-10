@@ -49,8 +49,8 @@ Include file for LiquidMenu library.
 #include "LiquidMenu_debug.h"
 
 #if I2C
-#include <LiquidCrystal_I2C.h>
-#define DisplayClass LiquidCrystal_I2C
+#include <LCD_1602_RUS.h>
+#define DisplayClass LCD_1602_RUS
 #pragma message ("LiquidMenu: Configured for I2C. Edit 'LiquidMenu_config.h' file to change it.")
 #else
 #include <LiquidCrystal.h>
@@ -72,7 +72,7 @@ enum class DataType : uint8_t {
   NOT_USED = 0,
   BOOL = 1, BOOLEAN = 1,
   INT8_T = 8,
-  UINT8_T = 9, BYTE = 9,
+  UINT8_T = 9,
   INT16_T = 16,
   UINT16_T = 17,
   INT32_T = 32,
@@ -792,10 +792,8 @@ public:
   /// Initializes the menu object.
   /**
   Call this method to fully initialize the menu object.
-
-  @note Needed when using an I2C display library.
   */
-  void init() const;
+ 
 
   ///@}
 
@@ -956,7 +954,7 @@ public:
 
   @param forward - true for forward, false for backward
   */
-  void switch_focus(bool forward = true);
+  bool switch_focus(bool forward = true);
 
   /// Sets the focus position for the whole menu at once.
   /**

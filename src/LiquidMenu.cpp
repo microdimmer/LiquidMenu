@@ -239,9 +239,3 @@ void LiquidMenu::softUpdate() const {
   }
   DEBUGLN("\n");
 }
-
-void LiquidMenu::init() const {
-  _p_liquidCrystal->createChar(15, glyph::rightFocus);
-  _p_liquidCrystal->createChar(14, glyph::leftFocus);
-  _p_liquidCrystal->createChar(13, glyph::customFocus);
-}

@@ -100,6 +100,12 @@ void LiquidLine::print(DisplayClass *p_liquidCrystal, bool isFocused) {
 
 	DEBUG(F("|\t"));
 	for (uint8_t v = 0; v < MAX_VARIABLES; v++) {
+		if (_variableCount == 2) {
+			char out_str[16];
+			sprintf(out_str,_variable[0], *static_cast<const int8_t*> (_variable[1]));
+			p_liquidCrystal->print(out_str);
+			break;
+		}
 		print_variable(p_liquidCrystal, v);
 	}
 	DEBUGLN();
@@ -116,7 +122,7 @@ void LiquidLine::print(DisplayClass *p_liquidCrystal, bool isFocused) {
 		case Position::LEFT: {
 			//p_liquidCrystal->print(NOTHING);
 			p_liquidCrystal->setCursor(_column - 1, _row);
-			p_liquidCrystal->write((uint8_t)14);
+			p_liquidCrystal->write('>');
 			DEBUGLN(F("left>"));
 			break;
 		} //case LEFT

@@ -126,12 +126,16 @@ bool LiquidSystem::operator=(LiquidScreen &p_liquidScreen) {
 	return change_screen(p_liquidScreen);
 }
 
-void LiquidSystem::switch_focus(bool forward) {
-	_p_liquidMenu[_currentMenu]->switch_focus(forward);
+bool LiquidSystem::switch_focus(bool forward) {
+	return _p_liquidMenu[_currentMenu]->switch_focus(forward);
 }
 
 bool LiquidSystem::set_focusPosition(Position position) {
-	return _p_liquidMenu[_currentMenu]->set_focusPosition(position);
+	bool ok = false;
+	for (uint8_t m = 0; m < _menuCount; m++) {
+		ok = _p_liquidMenu[m]->set_focusPosition(position);
+	}
+	return ok;
 }
 
 bool LiquidSystem::set_focusSymbol(Position position, uint8_t symbol[8]) {
