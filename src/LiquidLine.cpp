@@ -100,9 +100,16 @@ void LiquidLine::print(DisplayClass *p_liquidCrystal, bool isFocused) {
 
 	DEBUG(F("|\t"));
 	for (uint8_t v = 0; v < MAX_VARIABLES; v++) {
-		if (_variableCount == 2) {
-			char out_str[16];
-			sprintf(out_str,_variable[0], *static_cast<const int8_t*> (_variable[1]));
+			if (_variableCount == 2) {  //microdimmer
+			const char* variable = reinterpret_cast<const char*>(_variable[0]);
+			volatile const int len = strlen_P(variable);
+			char buffer[len+1];
+			for (uint8_t i = 0; i < len; i++) {
+				buffer[i] = pgm_read_byte_near(variable + i);
+			}
+			buffer[len] = '\0';
+			char out_str[21];
+			sprintf(out_str,buffer, *static_cast<const int8_t*> (_variable[1]));
 			p_liquidCrystal->print(out_str);
 			break;
 		}

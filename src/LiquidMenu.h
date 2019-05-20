@@ -51,7 +51,7 @@ Include file for LiquidMenu library.
 #if I2C
 #include <LCD_1602_RUS.h>
 #define DisplayClass LCD_1602_RUS
-#pragma message ("LiquidMenu: Configured for I2C. Edit 'LiquidMenu_config.h' file to change it.")
+// #pragma message ("LiquidMenu: Configured for I2C. Edit 'LiquidMenu_config.h' file to change it.")
 #else
 #include <LiquidCrystal.h>
 #define DisplayClass LiquidCrystal

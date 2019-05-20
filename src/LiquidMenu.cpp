@@ -91,7 +91,8 @@ void LiquidMenu::next_screen() {
       _currentScreen = 0;
     }
   } while (_p_liquidScreen[_currentScreen]->_hidden == true);
-  update();
+  // update();
+  softUpdate();
   DEBUG(F("Switched to the next screen (")); DEBUG(_currentScreen); DEBUG(F(")"));
 }
 
@@ -166,9 +167,23 @@ bool LiquidMenu::operator=(LiquidScreen &p_liquidScreen) {
 
 bool LiquidMenu::switch_focus(bool forward) {
   bool has_next_line;
-  _p_liquidCrystal->clear();
+  // _p_liquidCrystal->clear();
   has_next_line = _p_liquidScreen[_currentScreen]->switch_focus(forward);
-  update();
+
+  if (has_next_line) 
+  {
+    if (forward) {
+      _p_liquidCrystal->setCursor(0, 0);
+	    _p_liquidCrystal->write(' ');
+    }
+    else 
+    {
+      _p_liquidCrystal->setCursor(0, 1);
+	    _p_liquidCrystal->write(' ');
+    }
+  }
+  // update();
+  softUpdate();
   return has_next_line;
 }
 
@@ -227,15 +242,15 @@ void LiquidMenu::update() const {
 }
 
 void LiquidMenu::softUpdate() const {
-  DEBUGLN(F("Updating the LCD"));
-  for (uint8_t b = 0; b < DIVISION_LINE_LENGTH; b++) {
-    DEBUG(F("-"));
-  }
-  DEBUGLN();
-  DEBUG(F("|Screen ")); DEBUGLN(_currentScreen);
+  // DEBUGLN(F("Updating the LCD"));
+  // for (uint8_t b = 0; b < DIVISION_LINE_LENGTH; b++) {
+  //   DEBUG(F("-"));
+  // }
+  // DEBUGLN();
+  // DEBUG(F("|Screen ")); DEBUGLN(_currentScreen);
   _p_liquidScreen[_currentScreen]->print(_p_liquidCrystal);
-  for (uint8_t b = 0; b < DIVISION_LINE_LENGTH; b++) {
-    DEBUG(F("-"));
-  }
-  DEBUGLN("\n");
+  // for (uint8_t b = 0; b < DIVISION_LINE_LENGTH; b++) {
+  //   DEBUG(F("-"));
+  // }
+  // DEBUGLN("\n");
 }
