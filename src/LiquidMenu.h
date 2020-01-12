@@ -49,8 +49,8 @@ Include file for LiquidMenu library.
 #include "LiquidMenu_debug.h"
 
 #if I2C
-#include <LCD_1602_RUS.h>
-#define DisplayClass LCD_1602_RUS
+#include <LiquidCrystal_I2C.h>
+#define DisplayClass LiquidCrystal_I2C
 // #pragma message ("LiquidMenu: Configured for I2C. Edit 'LiquidMenu_config.h' file to change it.")
 #else
 #include <LiquidCrystal.h>
