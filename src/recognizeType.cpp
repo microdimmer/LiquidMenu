@@ -6,15 +6,15 @@ Contains the overloaded functions DataType recognizeType(... variable);
 
 #include "LiquidMenu.h"
 
-DataType recognizeType(bool variable) {
-	return DataType::BOOL;
-	variable = variable;
-}
+// DataType recognizeType(bool variable) {
+// 	return DataType::BOOL;
+// 	variable = variable;
+// }
 
-DataType recognizeType(char variable) {
-	return DataType::CHAR;
-	variable = variable;
-}
+// DataType recognizeType(char variable) {
+// 	return DataType::CHAR;
+// 	variable = variable;
+// }
 
 DataType recognizeType(char* variable) {
 	return DataType::CHAR_PTR;
@@ -46,22 +46,22 @@ DataType recognizeType(uint16_t variable) {
 	variable = variable;
 }
 
-DataType recognizeType(int32_t variable) {
-	return DataType::INT32_T;
-	variable = variable;
-}
+// DataType recognizeType(int32_t variable) {
+// 	return DataType::INT32_T;
+// 	variable = variable;
+// }
 
-DataType recognizeType(uint32_t variable) {
-	return DataType::UINT32_T;
-	variable = variable;
-}
+// DataType recognizeType(uint32_t variable) {
+// 	return DataType::UINT32_T;
+// 	variable = variable;
+// }
 
-DataType recognizeType(float variable) {
-	return DataType::FLOAT;
-	variable = variable;
-}
+// DataType recognizeType(float variable) {
+// 	return DataType::FLOAT;
+// 	variable = variable;
+// }
 
-DataType recognizeType(double variable) {
-	return DataType::DOUBLE;
-	variable = variable;
-}
+// DataType recognizeType(double variable) {
+// 	return DataType::DOUBLE;
+// 	variable = variable;
+// }

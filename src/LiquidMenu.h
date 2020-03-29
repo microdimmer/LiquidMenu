@@ -49,7 +49,8 @@ Include file for LiquidMenu library.
 #include "LiquidMenu_debug.h"
 
 #if I2C
-#include <LiquidCrystal_I2C.h>
+// #include <LiquidCrystal_I2C.h>
+#include <microLiquidCrystal_I2C.h>
 #define DisplayClass LiquidCrystal_I2C
 // #pragma message ("LiquidMenu: Configured for I2C. Edit 'LiquidMenu_config.h' file to change it.")
 #else
@@ -70,15 +71,15 @@ Used to store the data type of `void*` so that they can be cast back later.
 */
 enum class DataType : uint8_t {
   NOT_USED = 0,
-  BOOL = 1, BOOLEAN = 1,
+  // BOOL = 1, BOOLEAN = 1,
   INT8_T = 8,
   UINT8_T = 9,
   INT16_T = 16,
   UINT16_T = 17,
-  INT32_T = 32,
-  UINT32_T = 33,
-  FLOAT = 50, DOUBLE = 50,
-  CHAR = 60,
+  // INT32_T = 32,
+  // UINT32_T = 33,
+  // FLOAT = 50, DOUBLE = 50,
+  // CHAR = 60,
   CHAR_PTR = 61,
   CONST_CHAR_PTR = 62,
   PROG_CONST_CHAR_PTR = 65,
@@ -90,9 +91,9 @@ enum class DataType : uint8_t {
 Used to store and set the relative or absolute position of the focus indicator.
 */
 enum class Position : uint8_t {
-  RIGHT = 1, NORMAL = 1,
+  // RIGHT = 1, NORMAL = 1,
   LEFT = 2,
-  CUSTOM = 3,
+  // CUSTOM = 3,
 };
 
 /// @name recognizeType overloaded function
@@ -106,13 +107,13 @@ Used to recognize the data type of a variable received in a template function.
 @param variable - variable to be checked
 @returns the data type in `DataType` enum format
 */
-DataType recognizeType(bool variable);
+// DataType recognizeType(bool variable);
 
 /**
 @param variable - variable to be checked
 @returns the data type in `DataType` enum format
 */
-DataType recognizeType(char variable);
+// DataType recognizeType(char variable);
 
 /**
 @param variable - variable to be checked
@@ -154,25 +155,25 @@ DataType recognizeType(uint16_t variable);
 @param variable - variable to be checked
 @returns the data type in `DataType` enum format
 */
-DataType recognizeType(int32_t variable);
+// DataType recognizeType(int32_t variable);
 
 /**
 @param variable - variable to be checked
 @returns the data type in `DataType` enum format
 */
-DataType recognizeType(uint32_t variable);
+// DataType recognizeType(uint32_t variable);
 
 /**
 @param variable - variable to be checked
 @returns the data type in `DataType` enum format
 */
-DataType recognizeType(float variable);
+// DataType recognizeType(float variable);
 
 /**
 @param variable - variable to be checked
 @returns the data type in `DataType` enum format
 */
-DataType recognizeType(double variable);
+// DataType recognizeType(double variable);
 ///@}
 
 
@@ -209,7 +210,7 @@ public:
   */
   LiquidLine(uint8_t column, uint8_t row)
     : _row(row), _column(column), _focusRow(row - 1),
-      _focusColumn(column - 1), _focusPosition(Position::NORMAL),
+      _focusColumn(column - 1), _focusPosition(Position::LEFT),
       _variableCount(0), _focusable(false) {
     for (uint8_t i = 0; i < MAX_VARIABLES; i++) {
       _variable[i] = nullptr;

@@ -37,7 +37,7 @@ void print_me(uintptr_t address) {
 
 
 bool LiquidLine::attach_function(uint8_t number, void (*function)(void)) {
-	print_me(reinterpret_cast<uintptr_t>(this));
+	// print_me(reinterpret_cast<uintptr_t>(this));
 	if (number <= MAX_FUNCTIONS) {
 		_function[number - 1] = function;
 		DEBUG(F("Attached function ")); DEBUGLN(number);
@@ -51,35 +51,36 @@ bool LiquidLine::attach_function(uint8_t number, void (*function)(void)) {
 }
 
 bool LiquidLine::set_focusPosition(Position position, uint8_t column, uint8_t row) {
-	print_me(reinterpret_cast<uintptr_t>(this));
-	if (position <= Position::CUSTOM) {
+	// print_me(reinterpret_cast<uintptr_t>(this));
+	// if (position <= Position::CUSTOM) {
 		_focusPosition = position;
 		_focusColumn = column;
 		_focusRow = row;
-		DEBUG(F("Focus position set to ")); DEBUG((uint8_t)_focusPosition);
-		if (_focusPosition == Position::CUSTOM) {
-			DEBUG(F(" at (")); DEBUG(_focusRow); DEBUG(F(", "));
-			DEBUG(_focusColumn); DEBUG(F(")"));
-		}
-		DEBUGLN();
+		// DEBUG(F("Focus position set to ")); DEBUG((uint8_t)_focusPosition);
+		// if (_focusPosition == Position::CUSTOM) {
+		// 	DEBUG(F(" at (")); DEBUG(_focusRow); DEBUG(F(", "));
+		// 	DEBUG(_focusColumn); DEBUG(F(")"));
+		// }
+		// DEBUGLN();
 		return true;
-	} else {
-		DEBUGLN(F("Failed setting focus position, options are 'RIGHT', 'LEFT' and 'CUSTOM'"));
-		return false;
-	}
+	// } 
+	// else {
+	// 	DEBUGLN(F("Failed setting focus position, options are 'RIGHT', 'LEFT' and 'CUSTOM'"));
+	// 	return false;
+	// }
 }
 
-bool LiquidLine::set_asGlyph(uint8_t number) {
-	uint8_t index = number - 1;
-	if ( (index < MAX_VARIABLES) && (_variableType[index] == DataType::UINT8_T) ) {
-		_variableType[index] = DataType::GLYPH;
-		return true;
-	} else {
-		DEBUG(F("Setting variable ")); DEBUG(number);
-		DEBUGLN(F(" as glyph failed, the variable must be of 'byte' data type"));
-		return false;
-	}
-}
+// bool LiquidLine::set_asGlyph(uint8_t number) {
+// 	uint8_t index = number - 1;
+// 	if ( (index < MAX_VARIABLES) && (_variableType[index] == DataType::UINT8_T) ) {
+// 		_variableType[index] = DataType::GLYPH;
+// 		return true;
+// 	} else {
+// 		DEBUG(F("Setting variable ")); DEBUG(number);
+// 		DEBUGLN(F(" as glyph failed, the variable must be of 'byte' data type"));
+// 		return false;
+// 	}
+// }
 
 bool LiquidLine::set_asProgmem(uint8_t number) {
 	uint8_t index = number - 1;
@@ -120,12 +121,12 @@ void LiquidLine::print(DisplayClass *p_liquidCrystal, bool isFocused) {
 	if (isFocused) {
 		DEBUG(F("\t\t<Focus position: "));
 		switch (_focusPosition) {
-		case Position::RIGHT: {
-			p_liquidCrystal->write((uint8_t)15);
-			DEBUGLN(F("right>"));
-			//p_liquidCrystal->print(NOTHING);
-			break;
-		} //case RIGHT
+		// case Position::RIGHT: {
+		// 	p_liquidCrystal->write((uint8_t)15);
+		// 	DEBUGLN(F("right>"));
+		// 	//p_liquidCrystal->print(NOTHING);
+		// 	break;
+		// } //case RIGHT
 		case Position::LEFT: {
 			//p_liquidCrystal->print(NOTHING);
 			p_liquidCrystal->setCursor(_column - 1, _row);
@@ -133,22 +134,22 @@ void LiquidLine::print(DisplayClass *p_liquidCrystal, bool isFocused) {
 			DEBUGLN(F("left>"));
 			break;
 		} //case LEFT
-		case Position::CUSTOM: {
-			//p_liquidCrystal->print(NOTHING);
-			p_liquidCrystal->setCursor(_focusColumn, _focusRow);
-			p_liquidCrystal->write((uint8_t)13);
-			DEBUGLN(F("custom (")); DEBUG(_focusColumn);
-			DEBUG(F(", ")); DEBUG(_focusRow); DEBUGLN(F(")>"));
-			break;
-		} //case CUSTOM
-		default: {
-			DEBUG(F("invalid (")); DEBUG((uint8_t)_focusPosition);
-			DEBUGLN(F("), switching to default>"));
-			_focusPosition = Position::NORMAL;
-			p_liquidCrystal->write((uint8_t)15);
-			//p_liquidCrystal->print(NOTHING);
-			break;
-		} //default
+		// case Position::CUSTOM: {
+		// 	//p_liquidCrystal->print(NOTHING);
+		// 	p_liquidCrystal->setCursor(_focusColumn, _focusRow);
+		// 	p_liquidCrystal->write((uint8_t)13);
+		// 	DEBUGLN(F("custom (")); DEBUG(_focusColumn);
+		// 	DEBUG(F(", ")); DEBUG(_focusRow); DEBUGLN(F(")>"));
+		// 	break;
+		// } //case CUSTOM
+		// default: {
+		// 	DEBUG(F("invalid (")); DEBUG((uint8_t)_focusPosition);
+		// 	DEBUGLN(F("), switching to default>"));
+		// 	_focusPosition = Position::NORMAL;
+		// 	p_liquidCrystal->write((uint8_t)15);
+		// 	//p_liquidCrystal->print(NOTHING);
+		// 	break;
+		// } //default
 		} //switch (_focusPosition)
 	} else {
 		//p_liquidCrystal->print(NOTHING);
@@ -171,12 +172,12 @@ void LiquidLine::print_variable(DisplayClass *p_liquidCrystal, uint8_t number) {
 		p_liquidCrystal->print(variable);
 		break;
 	} //case CHAR_PTR
-	case DataType::CHAR: {
-		const char variable = *static_cast<const char*>(_variable[number]);
-		DEBUG(F("(char)")); DEBUG(variable);
-		p_liquidCrystal->print(variable);
-		break;
-	} //case CHAR
+	// case DataType::CHAR: {
+	// 	const char variable = *static_cast<const char*>(_variable[number]);
+	// 	DEBUG(F("(char)")); DEBUG(variable);
+	// 	p_liquidCrystal->print(variable);
+	// 	break;
+	// } //case CHAR
 
 	case DataType::INT8_T: {
 		const int8_t variable = *static_cast<const int8_t*>(_variable[number]);
@@ -204,39 +205,39 @@ void LiquidLine::print_variable(DisplayClass *p_liquidCrystal, uint8_t number) {
 		break;
 	} //case UINT16_T
 
-	case DataType::INT32_T: {
-		const int32_t variable = *static_cast<const int32_t*>(_variable[number]);
-		DEBUG(F("(int32_t)")); DEBUG(variable);
-		p_liquidCrystal->print(variable);
-		break;
-	} //case INT32_T
-	case DataType::UINT32_T: {
-		const uint32_t variable = *static_cast<const uint32_t*>(_variable[number]);
-		DEBUG(F("(uint32_t)")); DEBUG(variable);
-		p_liquidCrystal->print(variable);
-		break;
-	} //case UINT32_T
+	// case DataType::INT32_T: {
+	// 	const int32_t variable = *static_cast<const int32_t*>(_variable[number]);
+	// 	DEBUG(F("(int32_t)")); DEBUG(variable);
+	// 	p_liquidCrystal->print(variable);
+	// 	break;
+	// } //case INT32_T
+	// case DataType::UINT32_T: {
+	// 	const uint32_t variable = *static_cast<const uint32_t*>(_variable[number]);
+	// 	DEBUG(F("(uint32_t)")); DEBUG(variable);
+	// 	p_liquidCrystal->print(variable);
+	// 	break;
+	// } //case UINT32_T
 
-	case DataType::FLOAT: {
-		const float variable = *static_cast<const float*>(_variable[number]);
-		DEBUG(F("(float)")); DEBUG(variable);
-		p_liquidCrystal->print(variable);
-		break;
-	} //case FLOAT
+	// case DataType::FLOAT: {
+	// 	const float variable = *static_cast<const float*>(_variable[number]);
+	// 	DEBUG(F("(float)")); DEBUG(variable);
+	// 	p_liquidCrystal->print(variable);
+	// 	break;
+	// } //case FLOAT
 
-	case DataType::BOOL: {
-		const bool variable = *static_cast<const bool*>(_variable[number]);
-		DEBUG(F("(bool)")); DEBUG(variable);
-		p_liquidCrystal->print(variable);
-		break;
-	} //case BOOL
+	// case DataType::BOOL: {
+	// 	const bool variable = *static_cast<const bool*>(_variable[number]);
+	// 	DEBUG(F("(bool)")); DEBUG(variable);
+	// 	p_liquidCrystal->print(variable);
+	// 	break;
+	// } //case BOOL
 
-	case DataType::GLYPH: {
-		const uint8_t variable = *static_cast<const uint8_t*>(_variable[number]);
-		DEBUG(F("(glyph)")); DEBUG(variable);
-		p_liquidCrystal->write((uint8_t)variable);
-		break;
-	} //case BOOL
+	// case DataType::GLYPH: {
+	// 	const uint8_t variable = *static_cast<const uint8_t*>(_variable[number]);
+	// 	DEBUG(F("(glyph)")); DEBUG(variable);
+	// 	p_liquidCrystal->write((uint8_t)variable);
+	// 	break;
+	// } //case BOOL
 
 	case DataType::PROG_CONST_CHAR_PTR: {
 		const char* variable = reinterpret_cast<const char*>(_variable[number]);

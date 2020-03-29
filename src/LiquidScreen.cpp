@@ -70,16 +70,16 @@ bool LiquidScreen::add_line(LiquidLine &liquidLine) {
 
 bool LiquidScreen::set_focusPosition(Position position) {
 	print_me(reinterpret_cast<uintptr_t>(this));
-	if (position == Position::CUSTOM) {
-		DEBUGLN(F("Can't set focus position to 'CUSTOM' for the whole screen at once"));
-		return false;
-	} else {
+	// if (position == Position::CUSTOM) {
+	// 	DEBUGLN(F("Can't set focus position to 'CUSTOM' for the whole screen at once"));
+	// 	return false;
+	// } else {
 		DEBUG(F("Focus position set to : ")); DEBUGLN((uint8_t)position);
 		for (uint8_t l = 0; l < _lineCount; l++) {
 			_p_liquidLine[l]->set_focusPosition(position);
 		}
 		return true;
-	}
+	// }
 }
 
 void LiquidScreen::hide(bool hide) {

@@ -188,40 +188,40 @@ bool LiquidMenu::switch_focus(bool forward) {
 }
 
 bool LiquidMenu::set_focusPosition(Position position) {
-  print_me(reinterpret_cast<uintptr_t>(this));
-  if (position == Position::CUSTOM) {
-    DEBUGLN(F("Can't set a custom focus position for the whole menu at once"));
-    return false;
-  } else {
+  // print_me(reinterpret_cast<uintptr_t>(this));
+  // if (position == Position::CUSTOM) {
+  //   DEBUGLN(F("Can't set a custom focus position for the whole menu at once"));
+  //   return false;
+  // } else {
     DEBUG(F("Focus position set to ")); DEBUGLN((uint8_t)position);
     for (uint8_t s = 0; s < _screenCount; s++) {
       _p_liquidScreen[s]->set_focusPosition(position);
     }
     return true;
-  }
+  // }
 }
 
 bool LiquidMenu::set_focusSymbol(Position position, uint8_t symbol[8]) {
   switch (position) {
-  case Position::RIGHT: {
-    _p_liquidCrystal->createChar(15, symbol);
-    DEBUG(F("Right"));
-    break;
-  } //case RIGHT
+  // case Position::RIGHT: {
+  //   _p_liquidCrystal->createChar(15, symbol);
+  //   DEBUG(F("Right"));
+  //   break;
+  // } //case RIGHT
   case Position::LEFT: {
     _p_liquidCrystal->createChar(14, symbol);
     DEBUG(F("Left"));
     break;
   } //case LEFT
-  case Position::CUSTOM: {
-    _p_liquidCrystal->createChar(13, symbol);
-    DEBUG(F("Custom"));
-    break;
-  } //case CUSTOM
-  default: {
-    DEBUGLN(F("Invalid focus position, options are 'RIGHT', 'LEFT' and 'CUSTOM'"));
-    return false;
-  } //default
+  // case Position::CUSTOM: {
+  //   _p_liquidCrystal->createChar(13, symbol);
+  //   DEBUG(F("Custom"));
+  //   break;
+  // } //case CUSTOM
+  // default: {
+  //   DEBUGLN(F("Invalid focus position, options are 'RIGHT', 'LEFT' and 'CUSTOM'"));
+  //   return false;
+  // } //default
   } //switch (position)
   DEBUGLN(F("Focus symbol changed to:"));
   for (uint8_t i = 0; i < 8; i++) {
